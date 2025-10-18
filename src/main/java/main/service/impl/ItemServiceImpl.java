@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ItemServiceImpl implements ItemService {
@@ -40,5 +41,10 @@ public class ItemServiceImpl implements ItemService {
                 .build();
 
         this.itemRepository.save(item);
+    }
+
+    @Override
+    public Item getById(UUID id) {
+        return this.itemRepository.findById(id).orElseThrow(() -> new RuntimeException("Item not found"));
     }
 }
