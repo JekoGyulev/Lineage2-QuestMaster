@@ -10,9 +10,7 @@ import main.web.dto.QuestCreateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.UUID;
@@ -31,6 +29,19 @@ public class QuestController {
         this.questService = questService;
         this.itemService = itemService;
     }
+
+    @PatchMapping("/{id}")
+    public String captureQuest(@PathVariable UUID id, HttpSession session) {
+
+        UUID userId = (UUID) session.getAttribute("user_id");
+        Player player = this.playerService.getPlayer(userId);
+
+        this.questService.captureQuest(id, player);
+
+        return "redirect:/home";
+    }
+
+
 
     @GetMapping
     public ModelAndView getQuestsPage() {

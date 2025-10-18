@@ -19,4 +19,6 @@ public interface PlayerService {
     Player getPlayer(UUID playerId);
 
     List<Player> getAllAdventurers();
+
+    void updatePlayer(Player player);
 }

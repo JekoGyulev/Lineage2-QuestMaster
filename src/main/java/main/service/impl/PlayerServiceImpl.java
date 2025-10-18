@@ -84,6 +84,11 @@ public class PlayerServiceImpl implements PlayerService {
         return this.playerRepository.findAllByRoleOrderByXpDesc(PlayerRole.ADVENTURER);
     }
 
+    @Override
+    public void updatePlayer(Player player) {
+        this.playerRepository.save(player);
+    }
+
     private PlayerClass getRandomPlayerClass() {
         int randomIndex = ThreadLocalRandom.current().nextInt(0, PlayerClass.values().length);
         return PlayerClass.values()[randomIndex];
